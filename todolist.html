@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Added for better box sizing */
+      }
+      body {
+        background-color: aqua;
+      }
+      .todo-list {
+        border: 2px solid black;
+        width: 400px;
+        margin: 100px auto; /* Adjusted margin for better vertical centering */
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px; /* Added a light background color */
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .in {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      #input {
+        width: 200px;
+        padding: 9px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .add {
+        background-color: rgb(12, 190, 12);
+        font-size: 18px;
+        padding: 5px;
+        width: 97px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .add:hover {
+        background-color: rgb(13, 151, 13);
+      }
+      #todos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Space between items */
+      }
+      .todo-item {
+        display: flex;
+        justify-content: space-between; /* Space between text and button */
+        align-items: center;
+        background-color: #fff; /* White background for items */
+        border: 1px solid #ddd; /* Light border for items */
+        padding: 4px;
+        width: 300px;
+        margin-left: 24px;
+        border-radius: 4px;
+      }
+      .todo-item p {
+        margin: 0;
+        flex: 1; /* Allow paragraph to take up available space */
+      }
+      .btn {
+        font-size: 18px;
+        padding: 5px;
+        width: 80px; /* Adjusted width */
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        transition: 0.5s;
+        background-color: red;
+        margin-left: 10px; /* Space between text and button */
+      }
+      .btn:hover {
+        background-color: white;
+        color: red;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todo-list">
+      <h1>Todo List</h1>
+      <div class="in">
+        <input type="text" id="input" />
+        <button class="add" onclick="addItems()">Add</button>
+      </div>
+      <div id="todos">
+        <!-- New paragraphs will be added here -->
+      </div>
+    </div>
+    <script>
+      const addItems = () => {
+        const input = document.querySelector("#input");
+        const todosContainer = document.querySelector("#todos");
+
+        if (input.value.trim() !== "") {
+          // Create new container for the item
+          const todoItem = document.createElement("div");
+          todoItem.classList.add("todo-item");
+
+          // Create new paragraph
+          const newPara = document.createElement("p");
+          newPara.textContent = input.value;
+
+          // Create Hide button
+          const hideBtn = document.createElement("button");
+          hideBtn.textContent = "Delete";
+          hideBtn.classList.add("btn");
+          hideBtn.onclick = () => {
+            todoItem.style.display = "none";
+            hideBtn.style.display = "none";
+          };
+
+          // Append paragraph and button to the item container
+          todoItem.appendChild(newPara);
+          todoItem.appendChild(hideBtn);
+
+          // Append the item container to the todos container
+          todosContainer.appendChild(todoItem);
+
+          // Clear input field
+          input.value = "";
+        }
+      };
+    </script>
+  </body>
+</html>
